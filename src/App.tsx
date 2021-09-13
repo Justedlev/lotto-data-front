@@ -12,7 +12,6 @@ import CalculateNextCombination from './components/CalculateNextCombination';
 const App: React.FC = () => {
 
     return (
-        <Container>
             <BrowserRouter>
                 <Navigator items={ITEMS} />
                 <Switch>
@@ -22,7 +21,6 @@ const App: React.FC = () => {
                     <Redirect to={"/"} />
                 </Switch>
             </BrowserRouter>
-        </Container>
     );
 };
 
