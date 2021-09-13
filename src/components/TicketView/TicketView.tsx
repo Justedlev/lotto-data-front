@@ -7,8 +7,10 @@ import { useDispatch } from 'react-redux';
 import { deleteTicketAction } from '../../store/actions/action-tickets';
 
 type Props = {
-	ticket: Ticket
-}
+	index: number,
+	ticket: Ticket,
+	deleteTicket: (index: number) => void
+};
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	margin: {
@@ -47,7 +49,10 @@ const TicketView: React.FC<Props> = (props: Props) => {
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<IconButton edge="end" aria-label="delete" onClick={() => dispatch(deleteTicketAction(props.ticket.numberOfTicket))}>
+				<IconButton edge="end" aria-label="delete" onClick={() => {
+					dispatch(deleteTicketAction(props.ticket.numberOfTicket));
+					props.deleteTicket(props.index);
+				}}>
 					<DeleteIcon />
 				</IconButton>
 			</CardActions>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { ReducersType } from '../store/store';
 import { getTicketsAction } from '../store/actions/action-tickets';
@@ -31,13 +31,21 @@ const GetTicketsComponent: React.FC = () => {
         dispatch(getTicketsAction());
     }, [dispatch]);
 
-    const tickets: Ticket[] = useSelector<ReducersType, Ticket[]>(state => state.getTickets);
+    const ticketList: Ticket[] = useSelector<ReducersType, Ticket[]>(state => state.getTickets);
+    const [tickets, setTickets] = useState<Ticket[]>(ticketList);
     console.log(tickets);
+
+    function deleteTicket(index: number): void {
+        setTickets(ticketList.splice(index, 1));
+    }
 
     return (
         <Grid item xs={12} container className={classes.root} justifyContent="center" spacing={2}>
             {
-                tickets.length === 0 ? <CircularProgress /> : tickets.map((t, i) => <Grid key={i} item><TicketView ticket={t} /></Grid>)
+                ticketList.length === 0 ? <CircularProgress /> : ticketList.map((t, i) => <Grid key={i} item>
+                    <TicketView index={i} ticket={t} deleteTicket={deleteTicket} />
+                </Grid>
+                )
             }
         </Grid>
     );

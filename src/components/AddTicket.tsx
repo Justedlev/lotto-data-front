@@ -81,7 +81,6 @@ const AddTicket: React.FC = () => {
                         id="date"
                         label="Дата игры"
                         type="date"
-                        defaultValue="2021-11-03"
                         className={classes.textField}
                         InputLabelProps={{
                             shrink: true,
