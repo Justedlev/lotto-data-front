@@ -1,6 +1,5 @@
 import { Card, CardActions, CardContent, Chip, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
 import React from 'react';
 import Ticket from '../../models/Ticket';
 import './TicketView.module.css';
@@ -30,32 +29,24 @@ const TicketView: React.FC<Props> = (props: Props) => {
 
 	return (
 		<Card className={classes.root}>
-				{/* <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        /> */}
-				<CardContent>
-					<Typography gutterBottom variant="h5" component="h2">
-						Билет лотереи №{props.ticket.numberOfTicket}
-					</Typography>
-					<Typography gutterBottom variant="h6" component="h2">
-						Дата игры: {props.ticket.date}
-					</Typography>
-					<Typography variant="body2" color="textSecondary" component="p">
-						<Chip color="primary" label={props.ticket.combination.first} />&nbsp;
-						<Chip color="primary" label={props.ticket.combination.second} />&nbsp;
-						<Chip color="primary" label={props.ticket.combination.third} />&nbsp;
-						<Chip color="primary" label={props.ticket.combination.fourth} />&nbsp;
-						<Chip color="primary" label={props.ticket.combination.fifth} />&nbsp;
-						<Chip color="primary" label={props.ticket.combination.sixth} />&nbsp;
-						<Chip color="secondary" label={props.ticket.combination.strong} />
-					</Typography>
-				</CardContent>
+			<CardContent>
+				<Typography gutterBottom variant="h5" component="h2">
+					Билет лотереи №{props.ticket.numberOfTicket}
+				</Typography>
+				<Typography gutterBottom variant="h6" component="h2">
+					Дата игры: {props.ticket.date}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					<Chip color="primary" label={props.ticket.combination.first} />&nbsp;
+					<Chip color="primary" label={props.ticket.combination.second} />&nbsp;
+					<Chip color="primary" label={props.ticket.combination.third} />&nbsp;
+					<Chip color="primary" label={props.ticket.combination.fourth} />&nbsp;
+					<Chip color="primary" label={props.ticket.combination.fifth} />&nbsp;
+					<Chip color="primary" label={props.ticket.combination.sixth} />&nbsp;
+					<Chip color="secondary" label={props.ticket.combination.strong} />
+				</Typography>
+			</CardContent>
 			<CardActions>
-				{/* <IconButton aria-label="edit" className={classes.margin}>
-					<CreateIcon />
-				</IconButton> */}
 				<IconButton edge="end" aria-label="delete" onClick={() => dispatch(deleteTicketAction(props.ticket.numberOfTicket))}>
 					<DeleteIcon />
 				</IconButton>
