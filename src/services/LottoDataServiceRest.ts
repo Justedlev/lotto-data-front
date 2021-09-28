@@ -1,4 +1,5 @@
 import axios from "axios";
+import Repeatable from "../models/Repeatable";
 import { Ticket } from "../models/Ticket";
 import ILottoData from "./ILottoData";
 
@@ -37,8 +38,22 @@ export default class LottoDataServiceRest implements ILottoData {
         return tickets;
     }
 
-    getTicketsOfRangeDate(from: Date, to: Date): Promise<Ticket[]> {
-        throw new Error("Method not implemented.");
+    async getTicketsOfRangeDate(from: Date, to: Date): Promise<Ticket[]> {
+        const tickets: Ticket[] = await axios.get<Ticket[]>(`${this.url}/get/tickets?fromDate=${from}&toDate=${to}`)
+            .then(response => response.data);
+        console.log(tickets);
+        return tickets;
+    }
+
+    async getTicketsRepeatableNumbersOfRangeDate(from: Date, to: Date, combinationName: string): Promise<Repeatable[]> {
+        const fromDate: string = `${from.getFullYear()}-${from.getMonth()}-${from.getDate()}`;
+        const toDate: string = `${to.getFullYear()}-${to.getMonth()}-${to.getDate()}`;
+        console.log(fromDate);
+        
+        const repeatable: Repeatable[] = await axios.get<Repeatable[]>(`${this.url}/get/repeatableNumbers?fromDate=${fromDate}&toDate=${toDate}&numberCombination=${combinationName}`)
+            .then(response => response.data);
+        console.log(repeatable);
+        return repeatable;
     }
 
 }

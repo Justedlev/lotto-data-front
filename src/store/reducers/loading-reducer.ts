@@ -1,12 +1,13 @@
 import ActionType from "../../models/ActionType";
 import Loading from "../../models/Loading";
-import { SET_LOADING, SET_LOADING_ADD_TICKET, SET_LOADING_DELETE_TICKET, SET_LOADING_TICKETS } from "../actions/loading-actions";
+import { SET_LOADING, SET_LOADING_ADD_TICKET, SET_LOADING_DELETE_TICKET, SET_LOADING_REPEATABLE, SET_LOADING_TICKETS } from "../actions/loading-actions";
 
 const defaultLoading = {
     isLoading: false,
     isLoadingTickets: false,
     isLoadingDeleteTicket: false,
-    isLoadingAddTicket: false
+    isLoadingAddTicket: false,
+    isLoadingRepeatable: false
 };
 
 export function setLoadingReducer(state: Loading = defaultLoading, action: ActionType): Loading {
@@ -19,6 +20,8 @@ export function setLoadingReducer(state: Loading = defaultLoading, action: Actio
             return { ...state, isLoadingDeleteTicket: action.payload };
         case SET_LOADING_ADD_TICKET:
             return { ...state, isLoadingAddTicket: action.payload };
+        case SET_LOADING_REPEATABLE:
+            return { ...state, isLoadingRepeatable: action.payload };
         default:
             return state;
     }

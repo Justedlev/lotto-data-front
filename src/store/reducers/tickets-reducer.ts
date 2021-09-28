@@ -10,7 +10,7 @@ import {
     SET_COMBINATION_FIFTH_NUMBER_OF_TICKET,
     SET_COMBINATION_SIXTH_NUMBER_OF_TICKET,
     SET_COMBINATION_STRONG_NUMBER_OF_TICKET,
-    SET_DATE_OF_TICKET, SET_RECEIVED, SET_SAVED
+    SET_DATE_OF_TICKET, SET_RECEIVED, SET_SAVED, SET_TICKET
 } from "../actions/tickets-actions";
 
 const defaultTicketData = {
@@ -41,6 +41,8 @@ export function savedReducer(state: TicketData = defaultTicketData, action: Acti
 
 export function setTicketFieldsReducer(state: TicketData = defaultTicketData, action: ActionType): TicketData {
     switch (action.type) {
+        case SET_TICKET:
+            return { ...action.payload };
         case SET_NUMBER_OF_TICKET:
             return { ...state, ticket: { ...state.ticket, numberOfTicket: action.payload } };
         case SET_DATE_OF_TICKET:

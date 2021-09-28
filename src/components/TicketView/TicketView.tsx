@@ -1,10 +1,13 @@
-import { Card, CardActions, CardContent, Chip, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, Chip, CircularProgress, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import './TicketView.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTicketAction } from '../../store/actions/tickets-actions';
 import { Ticket } from '../../models/Ticket';
+import { ReducersType } from '../../store/redusers-combiner';
+import Loading from '../../models/Loading';
+import { loading } from '../../store/selectors';
 
 type Props = {
 	key: number,
@@ -27,6 +30,7 @@ const TicketView: React.FC<Props> = (props: Props) => {
 
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const loadingDeleted: boolean = useSelector<ReducersType, Loading>(loading).isLoadingDeleteTicket;
 
 	return (
 		<Card key={props.key} className={classes.root}>
@@ -48,11 +52,14 @@ const TicketView: React.FC<Props> = (props: Props) => {
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<IconButton edge="end" aria-label="delete" onClick={() => {
-					dispatch(deleteTicketAction(props.ticket.numberOfTicket));
-				}}>
-					<DeleteIcon />
-				</IconButton>
+				{
+					loadingDeleted ? <CircularProgress /> : <IconButton edge="end" aria-label="delete" onClick={() => {
+						dispatch(deleteTicketAction(props.ticket.numberOfTicket));
+					}}>
+						<DeleteIcon />
+					</IconButton>
+				}
+
 			</CardActions>
 		</Card>
 	);
