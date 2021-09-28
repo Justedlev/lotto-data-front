@@ -1,15 +1,14 @@
 import { Card, CardActions, CardContent, Chip, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
-import Ticket from '../../models/Ticket';
 import './TicketView.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteTicketAction } from '../../store/actions/action-tickets';
+import { deleteTicketAction } from '../../store/actions/tickets-actions';
+import { Ticket } from '../../models/Ticket';
 
 type Props = {
-	index: number,
-	ticket: Ticket,
-	deleteTicket: (index: number) => void
+	key: number,
+	ticket: Ticket
 };
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -30,7 +29,7 @@ const TicketView: React.FC<Props> = (props: Props) => {
 	const dispatch = useDispatch();
 
 	return (
-		<Card className={classes.root}>
+		<Card key={props.key} className={classes.root}>
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="h2">
 					Билет лотереи №{props.ticket.numberOfTicket}
@@ -38,7 +37,7 @@ const TicketView: React.FC<Props> = (props: Props) => {
 				<Typography gutterBottom variant="h6" component="h2">
 					Дата игры: {props.ticket.date}
 				</Typography>
-				<Typography variant="body2" color="textSecondary" component="p">
+				<Typography variant="body2" color="textSecondary" component="div">
 					<Chip color="primary" label={props.ticket.combination.first} />&nbsp;
 					<Chip color="primary" label={props.ticket.combination.second} />&nbsp;
 					<Chip color="primary" label={props.ticket.combination.third} />&nbsp;
@@ -51,7 +50,6 @@ const TicketView: React.FC<Props> = (props: Props) => {
 			<CardActions>
 				<IconButton edge="end" aria-label="delete" onClick={() => {
 					dispatch(deleteTicketAction(props.ticket.numberOfTicket));
-					props.deleteTicket(props.index);
 				}}>
 					<DeleteIcon />
 				</IconButton>

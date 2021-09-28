@@ -1,4 +1,4 @@
-import Ticket from '../models/Ticket';
+import { Ticket } from '../models/Ticket';
 
 interface ILottoData {
     addTicket(ticket: Ticket): Promise<Ticket>;

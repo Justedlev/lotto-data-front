@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { ReducersType } from '../store/store';
-import { getTicketsAction } from '../store/actions/action-tickets';
-import Ticket from '../models/Ticket';
+import { getTicketsAction } from '../store/actions/tickets-actions';
 import TicketView from './TicketView/TicketView';
 import { CircularProgress, createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { loading, ticketList } from '../store/selectors';
+import { Ticket, TicketsData } from '../models/Ticket';
+import { ReducersType } from '../store/redusers-combiner';
+import Loading from '../models/Loading';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,26 +28,19 @@ const GetTicketsComponent: React.FC = () => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
+    const tickets: Ticket[] = useSelector<ReducersType, TicketsData>(ticketList).tickets;
+    const load: boolean = useSelector<ReducersType, Loading>(loading).isLoadingTickets;
 
     useEffect(() => {
         dispatch(getTicketsAction());
     }, [dispatch]);
 
-    const ticketList: Ticket[] = useSelector<ReducersType, Ticket[]>(state => state.getTickets);
-    const [tickets, setTickets] = useState<Ticket[]>(ticketList);
-    console.log(tickets);
-
-    function deleteTicket(index: number): void {
-        setTickets(ticketList.splice(index, 1));
-    }
-
     return (
         <Grid item xs={12} container className={classes.root} justifyContent="center" spacing={2}>
             {
-                ticketList.length === 0 ? <CircularProgress /> : ticketList.map((t, i) => <Grid key={i} item>
-                    <TicketView index={i} ticket={t} deleteTicket={deleteTicket} />
-                </Grid>
-                )
+                load ? <CircularProgress /> : tickets.map((t, i) => <Grid key={i} item>
+                    <TicketView key={i} ticket={t}/>
+                </Grid>)
             }
         </Grid>
     );

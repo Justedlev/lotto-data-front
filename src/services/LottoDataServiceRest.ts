@@ -1,5 +1,5 @@
 import axios from "axios";
-import Ticket from "../models/Ticket";
+import { Ticket } from "../models/Ticket";
 import ILottoData from "./ILottoData";
 
 export default class LottoDataServiceRest implements ILottoData {
@@ -8,12 +8,12 @@ export default class LottoDataServiceRest implements ILottoData {
 
     async addTicket(ticket: Ticket): Promise<Ticket> {
         const t: Ticket = await axios.post<Ticket>(`${this.url}/add/ticket`,
-        ticket, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json'
-                }
-            })
+            ticket, {
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
             .then(response => response.data);
         console.log(t);
         return t;

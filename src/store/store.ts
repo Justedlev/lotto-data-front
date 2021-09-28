@@ -1,16 +1,5 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import Ticket from "../models/Ticket";
-import { reducerAddTicket, reducerGetTickets } from "./reducers/reducer-tickets";
+import { rootReducers } from "./redusers-combiner";
 
-export type ReducersType = {
-    getTickets: Ticket[],
-    addTicket: Ticket
-}
-
-const reducers = combineReducers<ReducersType>({
-    getTickets: reducerGetTickets,
-    addTicket: reducerAddTicket
-});
-
-export const store = createStore(reducers, applyMiddleware(thunk));
+export const store = createStore(rootReducers, applyMiddleware(thunk));
