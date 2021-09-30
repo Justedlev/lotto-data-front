@@ -1,12 +1,13 @@
 import ActionType from "../../models/ActionType";
+import { AllOrStrong } from "../../models/AllOrStrong";
 import Repeatable from "../../models/Repeatable";
 import RepeatableInput from "../../models/RepeatableInput";
-import { SET_REPEATABLES, SET_REPEATABLE_FROM_DATE, SET_REPEATABLE_NAME, SET_REPEATABLE_TO_DATE } from "../actions/repeatable-actions";
+import { SET_REPEATABLES, SET_REPEATABLE_ALLORSTRONG, SET_REPEATABLE_FROM_DATE, SET_REPEATABLE_TO_DATE } from "../actions/repeatable-actions";
 
 const defaultRepatableInput = {
+    allOrStrong: AllOrStrong.ALL,
     fromDate: new Date(),
-    toDate: new Date(),
-    name: ''
+    toDate: new Date()
 };
 
 export function setRepeatableFieldsReducer(state: RepeatableInput = defaultRepatableInput, action: ActionType): RepeatableInput {
@@ -15,8 +16,8 @@ export function setRepeatableFieldsReducer(state: RepeatableInput = defaultRepat
             return { ...state, fromDate: action.payload };
         case SET_REPEATABLE_TO_DATE:
             return { ...state, toDate: action.payload };
-        case SET_REPEATABLE_NAME:
-            return { ...state, name: action.payload };
+        case SET_REPEATABLE_ALLORSTRONG:
+            return { ...state, allOrStrong: action.payload };
         default:
             return state;
     }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AllOrStrong } from "../models/AllOrStrong";
 import Repeatable from "../models/Repeatable";
 import { Ticket } from "../models/Ticket";
 import ILottoData from "./ILottoData";
@@ -45,12 +46,11 @@ export default class LottoDataServiceRest implements ILottoData {
         return tickets;
     }
 
-    async getTicketsRepeatableNumbersOfRangeDate(from: Date, to: Date, combinationName: string): Promise<Repeatable[]> {
-        const fromDate: string = `${from.getFullYear()}-${from.getMonth()}-${from.getDate()}`;
-        const toDate: string = `${to.getFullYear()}-${to.getMonth()}-${to.getDate()}`;
-        console.log(fromDate);
-        
-        const repeatable: Repeatable[] = await axios.get<Repeatable[]>(`${this.url}/get/repeatableNumbers?fromDate=${fromDate}&toDate=${toDate}&numberCombination=${combinationName}`)
+    async getTicketsRepeatableNumbersOfRangeDate(from: Date, to: Date, allOrStrong: AllOrStrong): Promise<Repeatable[]> {
+        const fromDate: string = `${from.getFullYear()}-${from.getMonth() + 1}-${from.getDate()}`;
+        const toDate: string = `${to.getFullYear()}-${to.getMonth() + 1}-${to.getDate()}`;
+        console.log(fromDate, toDate, allOrStrong);
+        const repeatable: Repeatable[] = await axios.get<Repeatable[]>(`${this.url}/get/repeatableNumbers?fromDate=${fromDate}&toDate=${toDate}&s=${allOrStrong}`)
             .then(response => response.data);
         console.log(repeatable);
         return repeatable;

@@ -3,12 +3,7 @@ export const UNSUCCESSFUL = "unsuccessful";
 export const DEFAULT = "no-action-taken";
 
 export type Combination = {
-    first: number,
-    second: number,
-    third: number,
-    fourth: number,
-    fifth: number,
-    sixth: number,
+    sixNumbers: number[],
     strong: number
 }
 
@@ -23,7 +18,7 @@ export type TicketsData = {
 }
 
 export type Ticket = {
-    numberOfTicket: number,
+    id: number,
     date: Date,
     combination: Combination
 };

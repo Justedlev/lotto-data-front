@@ -3,28 +3,17 @@ import { TicketData, TicketsData } from "../../models/Ticket";
 import {
     SET_NUMBER_OF_TICKET,
     SET_GET_TICKETS,
-    SET_COMBINATION_FIRST_NUMBER_OF_TICKET,
-    SET_COMBINATION_SECOND_NUMBER_OF_TICKET,
-    SET_COMBINATION_THIRD_NUMBER_OF_TICKET,
-    SET_COMBINATION_FOURTH_NUMBER_OF_TICKET,
-    SET_COMBINATION_FIFTH_NUMBER_OF_TICKET,
-    SET_COMBINATION_SIXTH_NUMBER_OF_TICKET,
     SET_COMBINATION_STRONG_NUMBER_OF_TICKET,
-    SET_DATE_OF_TICKET, SET_RECEIVED, SET_SAVED, SET_TICKET
+    SET_DATE_OF_TICKET, SET_RECEIVED, SET_SAVED, SET_TICKET, SET_COMBINATION_SIX_NUMBERS_OF_TICKET
 } from "../actions/tickets-actions";
 
 const defaultTicketData = {
     saved: '',
     ticket: {
-        numberOfTicket: NaN,
+        id: NaN,
         date: new Date(),
         combination: {
-            first: NaN,
-            second: NaN,
-            third: NaN,
-            fourth: NaN,
-            fifth: NaN,
-            sixth: NaN,
+            sixNumbers: new Array(6).fill(NaN),
             strong: NaN
         }
     }
@@ -44,21 +33,11 @@ export function setTicketFieldsReducer(state: TicketData = defaultTicketData, ac
         case SET_TICKET:
             return { ...action.payload };
         case SET_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, numberOfTicket: action.payload } };
+            return { ...state, ticket: { ...state.ticket, id: action.payload } };
         case SET_DATE_OF_TICKET:
             return { ...state, ticket: { ...state.ticket, date: action.payload } };
-        case SET_COMBINATION_FIRST_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, first: action.payload } } };
-        case SET_COMBINATION_SECOND_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, second: action.payload } } };
-        case SET_COMBINATION_THIRD_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, third: action.payload } } };
-        case SET_COMBINATION_FOURTH_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, fourth: action.payload } } };
-        case SET_COMBINATION_FIFTH_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, fifth: action.payload } } };
-        case SET_COMBINATION_SIXTH_NUMBER_OF_TICKET:
-            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, sixth: action.payload } } };
+        case SET_COMBINATION_SIX_NUMBERS_OF_TICKET:
+            return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, sixNumbers: action.payload } } };
         case SET_COMBINATION_STRONG_NUMBER_OF_TICKET:
             return { ...state, ticket: { ...state.ticket, combination: { ...state.ticket.combination, strong: action.payload } } };
         default:

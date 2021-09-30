@@ -7,13 +7,9 @@ import { setLoadingAddTicketAction, setLoadingDeleteTicketAction, setLoadingTick
 export const SET_GET_TICKETS = "set-get-tickets";
 export const SET_NUMBER_OF_TICKET = "set-number-of-ticket";
 export const SET_TICKET = "set-ticket";
+export const SET_EDIT_TICKET = "set-edit-ticket";
 export const SET_DATE_OF_TICKET = "set-date-of-ticket";
-export const SET_COMBINATION_FIRST_NUMBER_OF_TICKET = "set-combination-first-number-of-ticket";
-export const SET_COMBINATION_SECOND_NUMBER_OF_TICKET = "set-combination-second-number-of-ticket";
-export const SET_COMBINATION_THIRD_NUMBER_OF_TICKET = "set-combination-third-number-of-ticket";
-export const SET_COMBINATION_FOURTH_NUMBER_OF_TICKET = "set-combination-fourth-number-of-ticket";
-export const SET_COMBINATION_FIFTH_NUMBER_OF_TICKET = "set-combination-fifth-number-of-ticket";
-export const SET_COMBINATION_SIXTH_NUMBER_OF_TICKET = "set-combination-sixth-number-of-ticket";
+export const SET_COMBINATION_SIX_NUMBERS_OF_TICKET = "set-combination-six-numbers-of-ticket";
 export const SET_COMBINATION_STRONG_NUMBER_OF_TICKET = "set-combination-strong-number-of-ticket";
 export const SET_SAVED = "set-saved";
 export const SET_RECEIVED = "set-received";
@@ -57,44 +53,9 @@ export function addDateOfTicketAction(date: Date): (dispatch: any) => void {
     };
 };
 
-export function addCombinationFirstNumberOfTicketAction(first: number): (dispatch: any) => void {
+export function addCombinationSixNumbersOfTicketAction(sixNumbers: number[]): (dispatch: any) => void {
     return dispatch => {
-        dispatch({ type: SET_COMBINATION_FIRST_NUMBER_OF_TICKET, payload: first });
-        dispatch(setSavedTicketAction(DEFAULT));
-    };
-};
-
-export function addCombinationSecondNumberOfTicketAction(second: number): (dispatch: any) => void {
-    return dispatch => {
-        dispatch({ type: SET_COMBINATION_SECOND_NUMBER_OF_TICKET, payload: second });
-        dispatch(setSavedTicketAction(DEFAULT));
-    };
-};
-
-export function addCombinationThirdNumberOfTicketAction(third: number): (dispatch: any) => void {
-    return dispatch => {
-        dispatch({ type: SET_COMBINATION_THIRD_NUMBER_OF_TICKET, payload: third });
-        dispatch(setSavedTicketAction(DEFAULT));
-    };
-};
-
-export function addCombinationFourthNumberOfTicketAction(fourth: number): (dispatch: any) => void {
-    return dispatch => {
-        dispatch({ type: SET_COMBINATION_FOURTH_NUMBER_OF_TICKET, payload: fourth });
-        dispatch(setSavedTicketAction(DEFAULT));
-    };
-};
-
-export function addCombinationFifthNumberOfTicketAction(fifth: number): (dispatch: any) => void {
-    return dispatch => {
-        dispatch({ type: SET_COMBINATION_FIFTH_NUMBER_OF_TICKET, payload: fifth });
-        dispatch(setSavedTicketAction(DEFAULT));
-    };
-};
-
-export function addCombinationSixthNumberOfTicketAction(sixth: number): (dispatch: any) => void {
-    return dispatch => {
-        dispatch({ type: SET_COMBINATION_SIXTH_NUMBER_OF_TICKET, payload: sixth });
+        dispatch({ type: SET_COMBINATION_SIX_NUMBERS_OF_TICKET, payload: sixNumbers });
         dispatch(setSavedTicketAction(DEFAULT));
     };
 };
@@ -106,9 +67,9 @@ export function addCombinationStrongNumberOfTicketAction(strong: number): (dispa
     };
 };
 
-export function updateTicketsAction(tickets: Ticket[]): (dispatch: any) => void {
+export function editTicketAction(ticket: Ticket): (dispatch: any) => void {
     return dispatch => {
-        dispatch({ type: SET_GET_TICKETS, payload: tickets });
+        dispatch({ type: SET_EDIT_TICKET, payload: ticket });
     };
 };
 
@@ -136,12 +97,7 @@ export function saveTicketAction(ticket: Ticket): (dispatch: any) => void {
             dispatch(setLoadingAddTicketAction(false));
             dispatch(addNumberOfTicketAction(NaN));
             dispatch(addDateOfTicketAction(new Date()));
-            dispatch(addCombinationFirstNumberOfTicketAction(NaN));
-            dispatch(addCombinationSecondNumberOfTicketAction(NaN));
-            dispatch(addCombinationThirdNumberOfTicketAction(NaN));
-            dispatch(addCombinationFourthNumberOfTicketAction(NaN));
-            dispatch(addCombinationFifthNumberOfTicketAction(NaN));
-            dispatch(addCombinationSixthNumberOfTicketAction(NaN));
+            dispatch(addCombinationSixNumbersOfTicketAction(new Array(6).fill(NaN)));
             dispatch(addCombinationStrongNumberOfTicketAction(NaN));
             dispatch(setSavedTicketAction(t != null ? SUCCESSFUL : UNSUCCESSFUL));
             dispatch(setReturnCodeAction(ReturnTypes.OK));

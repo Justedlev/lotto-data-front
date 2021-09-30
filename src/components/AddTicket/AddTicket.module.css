@@ -1,0 +1,18 @@
+.root {
+    text-align: center;
+    margin: 15px auto;
+    width: 90%;
+}
+
+.label_input_field {
+    display: inline-block;
+    margin: 15px;
+}
+
+.numbers {
+    display: inline-block;
+}
+
+.number_input {
+    max-width: 80px;
+}

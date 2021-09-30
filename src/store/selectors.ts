@@ -1,5 +1,6 @@
 import { ReducersType } from "./redusers-combiner";
 
+export const getSidebar = (state: ReducersType) => state.getApplication.isSidebar;
 export const isReceived = (state: ReducersType) => state.isReceived;
 export const isSaved = (state: ReducersType) => state.isSaved;
 export const ticketList = (state: ReducersType) => state.getTickets;

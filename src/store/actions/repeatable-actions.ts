@@ -1,4 +1,5 @@
 import service from "../../config/lotto-data-config";
+import { AllOrStrong } from "../../models/AllOrStrong";
 import Repeatable from "../../models/Repeatable";
 import ReturnTypes from "../../models/ReturnTypes";
 import { setLoadingRepeatableAction } from "./loading-actions";
@@ -9,7 +10,7 @@ export const SET_REPEATABLE_NUMBER = "set-repeatable-number";
 export const SET_REPEATABLE_COUNT = "set-repeatable-count";
 export const SET_REPEATABLE_FROM_DATE = "set-repeatable-from-date";
 export const SET_REPEATABLE_TO_DATE = "set-repeatable-to-date";
-export const SET_REPEATABLE_NAME = "set-repeatable-name";
+export const SET_REPEATABLE_ALLORSTRONG = "set-repeatable-allorstrong";
 
 export function setRepeatablesAction(repeatables: ReturnTypes[]): (dispatch: any) => void {
     return dispatch => {
@@ -17,11 +18,11 @@ export function setRepeatablesAction(repeatables: ReturnTypes[]): (dispatch: any
     }
 };
 
-export function getRepeatablesAction(fromDate: Date, toDate: Date, name: string): (dispatch: any) => void {
+export function getRepeatablesAction(fromDate: Date, toDate: Date, allOrStrong: AllOrStrong): (dispatch: any) => void {
     return async dispatch => {
         try{
             dispatch(setLoadingRepeatableAction(true));
-            const repeatables: Repeatable[] = await service.getTicketsRepeatableNumbersOfRangeDate(fromDate, toDate, name);
+            const repeatables: Repeatable[] = await service.getTicketsRepeatableNumbersOfRangeDate(fromDate, toDate, allOrStrong);
             dispatch({ type: SET_REPEATABLES, payload: repeatables });
             dispatch(setReturnCodeAction(ReturnTypes.OK));
             dispatch(setLoadingRepeatableAction(false));
@@ -44,8 +45,8 @@ export function setRepeatableToDateAction(toDate: Date): (dispatch: any) => void
     }
 };
 
-export function setRepeatableNameAction(name: string): (dispatch: any) => void {
+export function setRepeatableAllOrStrongAction(allOrStrong: string): (dispatch: any) => void {
     return dispatch => {
-        dispatch({ type: SET_REPEATABLE_NAME, payload: name });
+        dispatch({ type: SET_REPEATABLE_ALLORSTRONG, payload: allOrStrong });
     }
 };

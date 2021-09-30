@@ -1,0 +1,26 @@
+.menu {
+    margin-left: auto;
+}
+
+.logo {
+    display: flex;
+    text-decoration: none;
+}
+
+.logo_icon {
+    margin-right: 10px;
+    width: 30px;
+}
+
+.logo_title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.link_style {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 200;
+    margin-right: 10px;
+}

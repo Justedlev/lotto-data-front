@@ -1,9 +1,8 @@
 export const PATH_HOME = '/';
 export const PATH_ADD_TICKET = '/add-new-ticket';
-export const PATH_TABLE = '/table';
+export const PATH_REPEATABLE = '/repeatable';
 
 export const ITEMS: { path: string, label: string }[] = [
-    { path: PATH_HOME, label: 'Домой' },
-    { path: PATH_ADD_TICKET, label: 'Добавить новый билет' },
-    { path: PATH_TABLE, label: 'Таблица' },
+    { path: PATH_ADD_TICKET, label: 'Добавить' },
+    { path: PATH_REPEATABLE, label: 'Повторения' },
 ]
