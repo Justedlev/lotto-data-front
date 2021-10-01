@@ -1,13 +1,33 @@
-import React from 'react';
-import classes from './Repeatables.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import RepeatableInput from '../../models/RepeatableInput';
-import { getRepeatablesAction, setRepeatableAllOrStrongAction, setRepeatableFromDateAction, setRepeatableToDateAction } from '../../store/actions/repeatable-actions';
-import { getRepeatables, loading, setRepeatableFields } from '../../store/selectors';
-import { Alert, Button, Divider, FormControl, FormLabel, InputLabel, LinearProgress, MenuItem, Select, TextField } from '@mui/material';
-import { Box } from '@mui/system';
-import RepeatableTableComponent from '../RepeatableTable/RepeatableTableComponent';
-import { convertDateToString } from '../../utils/converter';
+import React from "react";
+import classes from "./Repeatables.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import RepeatableInput from "../../models/RepeatableInput";
+import {
+    getRepeatablesAction,
+    setRepeatableAllOrStrongAction,
+    setRepeatableFromDateAction,
+    setRepeatableToDateAction,
+} from "../../store/actions/repeatable-actions";
+import {
+    getRepeatables,
+    loading,
+    setRepeatableFields,
+} from "../../store/selectors";
+import {
+    Alert,
+    Button,
+    Divider,
+    FormControl,
+    FormLabel,
+    InputLabel,
+    LinearProgress,
+    MenuItem,
+    Select,
+    TextField,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import RepeatableTableComponent from "../RepeatableTable/RepeatableTableComponent";
+import { convertDateToString } from "../../utils/converter";
 
 const RepeatablesComponent: React.FC = () => {
     const dispatch = useDispatch();
@@ -31,9 +51,15 @@ const RepeatablesComponent: React.FC = () => {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            value={convertDateToString(repeatableInput.fromDate)}
+                            value={convertDateToString(
+                                repeatableInput.fromDate
+                            )}
                             onChange={(e) => {
-                                dispatch(setRepeatableFromDateAction(new Date(e.target.value)));
+                                dispatch(
+                                    setRepeatableFromDateAction(
+                                        new Date(e.target.value)
+                                    )
+                                );
                             }}
                         />
                         <TextField
@@ -47,23 +73,36 @@ const RepeatablesComponent: React.FC = () => {
                             }}
                             value={convertDateToString(repeatableInput.toDate)}
                             onChange={(e) => {
-                                dispatch(setRepeatableToDateAction(new Date(e.target.value)));
+                                dispatch(
+                                    setRepeatableToDateAction(
+                                        new Date(e.target.value)
+                                    )
+                                );
                             }}
                         />
-                        <FormControl style={{ margin: "10px" }} sx={{ minWidth: 165 }}>
-                            <InputLabel id="demo-simple-select-label">По каким числам</InputLabel>
+                        <FormControl
+                            style={{ margin: "10px" }}
+                            sx={{ minWidth: 165 }}
+                        >
+                            <InputLabel id="demo-simple-select-label">
+                                По каким числам
+                            </InputLabel>
                             <Select
                                 size="small"
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={repeatableInput.allOrStrong}
                                 label="По каким числам"
-                                onChange={e => {
-                                    dispatch(setRepeatableAllOrStrongAction(e.target.value));
+                                onChange={(e) => {
+                                    dispatch(
+                                        setRepeatableAllOrStrongAction(
+                                            e.target.value
+                                        )
+                                    );
                                 }}
                             >
-                                <MenuItem value='all'>Основные</MenuItem>
-                                <MenuItem value='strong'>Усилиное</MenuItem>
+                                <MenuItem value="all">Основные</MenuItem>
+                                <MenuItem value="strong">Усилиное</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>
@@ -73,21 +112,30 @@ const RepeatablesComponent: React.FC = () => {
                     color="primary"
                     size="large"
                     onClick={() => {
-                        dispatch(getRepeatablesAction(repeatableInput.fromDate, repeatableInput.toDate, repeatableInput.allOrStrong));
+                        dispatch(
+                            getRepeatablesAction(
+                                repeatableInput.fromDate,
+                                repeatableInput.toDate,
+                                repeatableInput.allOrStrong
+                            )
+                        );
                     }}
                 >
                     Найти
                 </Button>
             </div>
             <Divider style={{ margin: "10px" }} variant="middle" />
-            {
-                loadingRepeatable ? <Box sx={{ width: '100%' }}>
+            {loadingRepeatable ? (
+                <Box sx={{ width: "100%" }}>
                     <LinearProgress />
-                </Box> : repeatableData.repeatables.length === 0 ? <Alert severity="warning">Ничего не найдено</Alert> : <RepeatableTableComponent rows={repeatableData.repeatables} />
-            }
+                </Box>
+            ) : repeatableData.repeatables.length === 0 ? (
+                <Alert severity="warning">Ничего не найдено</Alert>
+            ) : (
+                <RepeatableTableComponent rows={repeatableData.repeatables} />
+            )}
         </div>
     );
-
-}
+};
 
 export default RepeatablesComponent;

@@ -1,5 +1,5 @@
 type Application = {
-    isSidebar: boolean
-}
+    isSidebar: boolean;
+};
 
 export default Application;

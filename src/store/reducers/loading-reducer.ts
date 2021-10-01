@@ -1,16 +1,25 @@
 import ActionType from "../../models/ActionType";
 import Loading from "../../models/Loading";
-import { SET_LOADING, SET_LOADING_ADD_TICKET, SET_LOADING_DELETE_TICKET, SET_LOADING_REPEATABLE, SET_LOADING_TICKETS } from "../actions/loading-actions";
+import {
+    SET_LOADING,
+    SET_LOADING_ADD_TICKET,
+    SET_LOADING_DELETE_TICKET,
+    SET_LOADING_REPEATABLE,
+    SET_LOADING_TICKETS,
+} from "../actions/loading-actions";
 
 const defaultLoading = {
     isLoading: false,
     isLoadingTickets: false,
     isLoadingDeleteTicket: false,
     isLoadingAddTicket: false,
-    isLoadingRepeatable: false
+    isLoadingRepeatable: false,
 };
 
-export function setLoadingReducer(state: Loading = defaultLoading, action: ActionType): Loading {
+export function setLoadingReducer(
+    state: Loading = defaultLoading,
+    action: ActionType
+): Loading {
     switch (action.type) {
         case SET_LOADING:
             return { ...state, isLoading: action.payload };

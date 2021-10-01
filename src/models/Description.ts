@@ -1,5 +1,5 @@
 type Description = {
-    discription: string
-}
+    discription: string;
+};
 
 export default Description;

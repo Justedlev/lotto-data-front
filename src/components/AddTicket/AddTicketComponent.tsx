@@ -1,28 +1,36 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SUCCESSFUL, Ticket, TicketData, UNSUCCESSFUL } from '../../models/Ticket';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    SUCCESSFUL,
+    Ticket,
+    TicketData,
+    UNSUCCESSFUL,
+} from "../../models/Ticket";
 import {
     addCombinationSixNumbersOfTicketAction,
     addCombinationStrongNumberOfTicketAction,
     addDateOfTicketAction,
     addIdTicketAction,
-    saveTicketAction
-} from '../../store/actions/tickets-actions';
-import { ReducersType } from '../../store/redusers-combiner';
-import { isSaved, loading, setTicketFields } from '../../store/selectors';
-import Loading from '../../models/Loading';
-import { Alert, CardActions, TextField } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
-import classes from './AddTicket.module.css';
-import { LoadingButton } from '@mui/lab';
-import { convertDateToString } from '../../utils/converter';
+    saveTicketAction,
+} from "../../store/actions/tickets-actions";
+import { ReducersType } from "../../store/redusers-combiner";
+import { isSaved, loading, setTicketFields } from "../../store/selectors";
+import Loading from "../../models/Loading";
+import { Alert, CardActions, TextField } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
+import classes from "./AddTicket.module.css";
+import { LoadingButton } from "@mui/lab";
+import { convertDateToString } from "../../utils/converter";
 
 const AddTicketComponent: React.FC = () => {
-
     const dispatch = useDispatch();
-    const ticket: Ticket = useSelector<ReducersType, TicketData>(setTicketFields).ticket;
+    const ticket: Ticket = useSelector<ReducersType, TicketData>(
+        setTicketFields
+    ).ticket;
     const saved: string = useSelector<ReducersType, TicketData>(isSaved).saved;
-    const loadingSaved: boolean = useSelector<ReducersType, Loading>(loading).isLoadingAddTicket;
+    const loadingSaved: boolean = useSelector<ReducersType, Loading>(
+        loading
+    ).isLoadingAddTicket;
 
     console.log(ticket);
 
@@ -30,7 +38,7 @@ const AddTicketComponent: React.FC = () => {
         const array = ticket.combination.sixNumbers.slice();
         array.splice(index, 1, num);
         dispatch(addCombinationSixNumbersOfTicketAction(array));
-    }
+    };
 
     return (
         <div className={classes.root}>
@@ -57,7 +65,9 @@ const AddTicketComponent: React.FC = () => {
                     }}
                     value={convertDateToString(ticket.date)}
                     onChange={(e) => {
-                        dispatch(addDateOfTicketAction(new Date(e.target.value)));
+                        dispatch(
+                            addDateOfTicketAction(new Date(e.target.value))
+                        );
                     }}
                 />
             </div>
@@ -73,7 +83,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(0, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(0, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -86,7 +98,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(1, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(1, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -99,7 +113,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(2, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(2, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -112,7 +128,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(3, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(3, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -125,7 +143,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(4, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(4, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -138,7 +158,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handleAddToArray(5, parseInt(e.target.value))}
+                    onChange={(e) =>
+                        handleAddToArray(5, parseInt(e.target.value))
+                    }
                 />
                 <TextField
                     size="small"
@@ -152,7 +174,11 @@ const AddTicketComponent: React.FC = () => {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        dispatch(addCombinationStrongNumberOfTicketAction(parseInt(e.target.value)));
+                        dispatch(
+                            addCombinationStrongNumberOfTicketAction(
+                                parseInt(e.target.value)
+                            )
+                        );
                     }}
                 />
             </div>
@@ -171,13 +197,13 @@ const AddTicketComponent: React.FC = () => {
                     Добавить
                 </LoadingButton>
             </CardActions>
-            {
-                saved === SUCCESSFUL ? <Alert severity="success">Успешно добавлен</Alert> :
-                    saved === UNSUCCESSFUL ? <Alert severity="error">Не удалось добавить</Alert> : null
-            }
+            {saved === SUCCESSFUL ? (
+                <Alert severity="success">Успешно добавлен</Alert>
+            ) : saved === UNSUCCESSFUL ? (
+                <Alert severity="error">Не удалось добавить</Alert>
+            ) : null}
         </div>
     );
-
-}
+};
 
 export default AddTicketComponent;

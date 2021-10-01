@@ -1,3 +1,4 @@
 export enum AllOrStrong {
-    ALL = 'all', STRONG = 'strong'
+    ALL = "all",
+    STRONG = "strong",
 }
