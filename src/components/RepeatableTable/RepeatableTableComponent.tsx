@@ -97,7 +97,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                     <TableCell
                         key={headCell.id}
                         align='center'
-                        padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
                         <TableSortLabel
@@ -214,6 +213,7 @@ export default function RepeatableTableComponent(r: Rows) {
                     </Table>
                 </TableContainer>
                 <TablePagination
+                    labelRowsPerPage="Отображать"
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
                     count={r.rows.length}

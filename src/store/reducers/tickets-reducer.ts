@@ -1,7 +1,7 @@
 import ActionType from "../../models/ActionType";
 import { TicketData, TicketsData } from "../../models/Ticket";
 import {
-    SET_NUMBER_OF_TICKET,
+    SET_ID_TICKET,
     SET_GET_TICKETS,
     SET_COMBINATION_STRONG_NUMBER_OF_TICKET,
     SET_DATE_OF_TICKET, SET_RECEIVED, SET_SAVED, SET_TICKET, SET_COMBINATION_SIX_NUMBERS_OF_TICKET
@@ -32,7 +32,7 @@ export function setTicketFieldsReducer(state: TicketData = defaultTicketData, ac
     switch (action.type) {
         case SET_TICKET:
             return { ...action.payload };
-        case SET_NUMBER_OF_TICKET:
+        case SET_ID_TICKET:
             return { ...state, ticket: { ...state.ticket, id: action.payload } };
         case SET_DATE_OF_TICKET:
             return { ...state, ticket: { ...state.ticket, date: action.payload } };

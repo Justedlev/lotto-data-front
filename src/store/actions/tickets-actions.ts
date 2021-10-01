@@ -5,7 +5,7 @@ import { setReturnCodeAction } from './return-code-actions';
 import { setLoadingAddTicketAction, setLoadingDeleteTicketAction, setLoadingTicketsAction } from "./loading-actions";
 
 export const SET_GET_TICKETS = "set-get-tickets";
-export const SET_NUMBER_OF_TICKET = "set-number-of-ticket";
+export const SET_ID_TICKET = "set-id-ticket";
 export const SET_TICKET = "set-ticket";
 export const SET_EDIT_TICKET = "set-edit-ticket";
 export const SET_DATE_OF_TICKET = "set-date-of-ticket";
@@ -39,9 +39,9 @@ export function setTicketAction(ticket: Ticket): (dispatch: any) => void {
     }
 };
 
-export function addNumberOfTicketAction(numberOfTicket: number): (dispatch: any) => void {
+export function addIdTicketAction(id: number): (dispatch: any) => void {
     return dispatch => {
-        dispatch({ type: SET_NUMBER_OF_TICKET, payload: numberOfTicket });
+        dispatch({ type: SET_ID_TICKET, payload: id });
         dispatch(setSavedTicketAction(DEFAULT));
     };
 };
@@ -95,7 +95,7 @@ export function saveTicketAction(ticket: Ticket): (dispatch: any) => void {
             dispatch(setLoadingAddTicketAction(true));
             const t: Ticket = await service.addTicket(ticket);
             dispatch(setLoadingAddTicketAction(false));
-            dispatch(addNumberOfTicketAction(NaN));
+            dispatch(addIdTicketAction(NaN));
             dispatch(addDateOfTicketAction(new Date()));
             dispatch(addCombinationSixNumbersOfTicketAction(new Array(6).fill(NaN)));
             dispatch(addCombinationStrongNumberOfTicketAction(NaN));

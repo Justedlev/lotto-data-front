@@ -29,10 +29,10 @@ const NavbarComponent: React.FC<Props> = (props: Props) => {
                     <span className={classes.logo_title}>ЛоттоБилеты</span>
                 </a>
                 <div className={classes.menu}>
-                    <IconButton color="inherit" onClick={() => history.push(PATH_ADD_TICKET) } aria-label="upload picture" component="span">
+                    <IconButton color="inherit" onClick={() => history.push(PATH_ADD_TICKET)} aria-label="upload picture" component="span">
                         <AddIcon />
                     </IconButton>
-                    <IconButton color="inherit" onClick={() => history.push(PATH_REPEATABLE) } aria-label="upload picture" component="span">
+                    <IconButton color="inherit" onClick={() => history.push(PATH_REPEATABLE)} aria-label="upload picture" component="span">
                         <TableViewIcon />
                     </IconButton>
                 </div>

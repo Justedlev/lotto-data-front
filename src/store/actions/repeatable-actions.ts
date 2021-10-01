@@ -2,6 +2,7 @@ import service from "../../config/lotto-data-config";
 import { AllOrStrong } from "../../models/AllOrStrong";
 import Repeatable from "../../models/Repeatable";
 import ReturnTypes from "../../models/ReturnTypes";
+import { convertDateToString } from "../../utils/converter";
 import { setLoadingRepeatableAction } from "./loading-actions";
 import { setReturnCodeAction } from "./return-code-actions";
 
@@ -20,9 +21,9 @@ export function setRepeatablesAction(repeatables: ReturnTypes[]): (dispatch: any
 
 export function getRepeatablesAction(fromDate: Date, toDate: Date, allOrStrong: AllOrStrong): (dispatch: any) => void {
     return async dispatch => {
-        try{
+        try {
             dispatch(setLoadingRepeatableAction(true));
-            const repeatables: Repeatable[] = await service.getTicketsRepeatableNumbersOfRangeDate(fromDate, toDate, allOrStrong);
+            const repeatables: Repeatable[] = await service.getTicketsRepeatableNumbersOfRangeDate(convertDateToString(fromDate), convertDateToString(toDate), allOrStrong);
             dispatch({ type: SET_REPEATABLES, payload: repeatables });
             dispatch(setReturnCodeAction(ReturnTypes.OK));
             dispatch(setLoadingRepeatableAction(false));

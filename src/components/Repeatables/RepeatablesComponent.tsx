@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import RepeatableInput from '../../models/RepeatableInput';
 import { getRepeatablesAction, setRepeatableAllOrStrongAction, setRepeatableFromDateAction, setRepeatableToDateAction } from '../../store/actions/repeatable-actions';
 import { getRepeatables, loading, setRepeatableFields } from '../../store/selectors';
-import { Alert, Button, FormControl, FormLabel, InputLabel, LinearProgress, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, Button, Divider, FormControl, FormLabel, InputLabel, LinearProgress, MenuItem, Select, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import RepeatableTableComponent from '../RepeatableTable/RepeatableTableComponent';
+import { convertDateToString } from '../../utils/converter';
 
 const RepeatablesComponent: React.FC = () => {
     const dispatch = useDispatch();
@@ -22,30 +23,32 @@ const RepeatablesComponent: React.FC = () => {
                 <FormLabel>
                     <Box sx={{ minWidth: 120 }}>
                         <TextField
-                            style={{ margin: "10px" }}
+                            style={{ margin: "10px", width: "165px" }}
                             id="from-date"
                             label="С даты игры"
                             type="date"
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            value={convertDateToString(repeatableInput.fromDate)}
                             onChange={(e) => {
                                 dispatch(setRepeatableFromDateAction(new Date(e.target.value)));
                             }}
                         />
                         <TextField
-                            style={{ margin: "10px" }}
+                            style={{ margin: "10px", width: "165px" }}
                             id="to-date"
                             label="До даты игры"
                             type="date"
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            value={convertDateToString(repeatableInput.toDate)}
                             onChange={(e) => {
                                 dispatch(setRepeatableToDateAction(new Date(e.target.value)));
                             }}
                         />
-                        <FormControl style={{ margin: "10px" }} sx={{ minWidth: 200 }}>
+                        <FormControl style={{ margin: "10px" }} sx={{ minWidth: 165 }}>
                             <InputLabel id="demo-simple-select-label">По каким числам</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -73,6 +76,7 @@ const RepeatablesComponent: React.FC = () => {
                     Найти
                 </Button>
             </div>
+            <Divider style={{ margin: "10px" }} variant="middle" />
             {
                 loadingRepeatable ? <Box sx={{ width: '100%' }}>
                     <LinearProgress />

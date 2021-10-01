@@ -46,11 +46,9 @@ export default class LottoDataServiceRest implements ILottoData {
         return tickets;
     }
 
-    async getTicketsRepeatableNumbersOfRangeDate(from: Date, to: Date, allOrStrong: AllOrStrong): Promise<Repeatable[]> {
-        const fromDate: string = `${from.getFullYear()}-${from.getMonth() + 1}-${from.getDate()}`;
-        const toDate: string = `${to.getFullYear()}-${to.getMonth() + 1}-${to.getDate()}`;
-        console.log(fromDate, toDate, allOrStrong);
-        const repeatable: Repeatable[] = await axios.get<Repeatable[]>(`${this.url}/get/repeatableNumbers?fromDate=${fromDate}&toDate=${toDate}&s=${allOrStrong}`)
+    async getTicketsRepeatableNumbersOfRangeDate(from: string, to: string, allOrStrong: AllOrStrong): Promise<Repeatable[]> {
+        console.log(from, to, allOrStrong);
+        const repeatable: Repeatable[] = await axios.get<Repeatable[]>(`${this.url}/get/repeatableNumbers?fromDate=${from}&toDate=${to}&s=${allOrStrong}`)
             .then(response => response.data);
         console.log(repeatable);
         return repeatable;

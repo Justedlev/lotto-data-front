@@ -12,7 +12,7 @@ import classes from './Tickets.module.css';
 const GetTicketsComponent: React.FC = () => {
 
     const dispatch = useDispatch();
-    const tickets: Ticket[] = useSelector<ReducersType, TicketsData>(ticketList).tickets;
+    const tickets: Ticket[] = useSelector<ReducersType, TicketsData>(ticketList).tickets.sort((a, b) => b.id - a.id);
     const loadingTickets: boolean = useSelector<ReducersType, Loading>(loading).isLoadingTickets;
 
     useEffect(() => {
@@ -22,9 +22,7 @@ const GetTicketsComponent: React.FC = () => {
     return (
         <Grid className={classes.root}>
             {
-                loadingTickets ? <CircularProgress /> : tickets.sort(function (a, b) {
-                    return b.id - a.id;
-                }).map((t, i) => <TicketView key={i} ticket={t} />)
+                loadingTickets ? <CircularProgress /> : tickets.map((t, i) => <TicketView key={i} ticket={t} />)
             }
         </Grid>
     );

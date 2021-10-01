@@ -28,9 +28,9 @@ const TicketView: React.FC<Props> = (props: Props) => {
 				</Typography>
 				<Typography variant="body2" color="textSecondary" component="div">
 					{
-						props.ticket.combination.sixNumbers.map((n, i) => <><Chip key={i} color="primary" label={n} />&nbsp;</>)
+						props.ticket.combination.sixNumbers.sort((a, b) => a - b).map((n, i) => <Chip style={{ margin: "2px" }} key={i} color="primary" label={n} />)
 					}
-					<Chip color="secondary" label={props.ticket.combination.strong} />
+					<Chip style={{ margin: "2px" }} color="secondary" label={props.ticket.combination.strong} />
 				</Typography>
 			</CardContent>
 			<CardActions className={classes.icon_button}>

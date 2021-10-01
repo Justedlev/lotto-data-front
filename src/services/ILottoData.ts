@@ -8,7 +8,7 @@ interface ILottoData {
     getTicket(numberOfTicket: number): Promise<Ticket>;
     getTickets(): Promise<Ticket[]>;
     getTicketsOfRangeDate(from: Date, to: Date): Promise<Ticket[]>;
-    getTicketsRepeatableNumbersOfRangeDate(from: Date, to: Date, allOrStrong: AllOrStrong): Promise<Repeatable[]>
+    getTicketsRepeatableNumbersOfRangeDate(from: string, to: string, allOrStrong: AllOrStrong): Promise<Repeatable[]>
 }
 
 export default ILottoData;
