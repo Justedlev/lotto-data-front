@@ -24,11 +24,7 @@ const NavbarComponent: React.FC<Props> = (props: Props) => {
         <AppBar position="static">
             <Toolbar>
                 <a className={classes.logo} href={PATH_HOME}>
-                    <img
-                        className={classes.logo_icon}
-                        src={LottoTicketIcon}
-                        alt="lotto-icon"
-                    />
+                    <img className={classes.logo_icon} src={LottoTicketIcon} alt="lotto-icon" />
                     <span className={classes.logo_title}>ЛоттоБилеты</span>
                 </a>
                 <div className={classes.menu}>

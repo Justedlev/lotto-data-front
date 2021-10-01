@@ -28,13 +28,8 @@ const defaultTicketsData = {
     tickets: [],
 };
 
-export function savedReducer(
-    state: TicketData = defaultTicketData,
-    action: ActionType
-): TicketData {
-    return action.type === SET_SAVED
-        ? { ...state, saved: action.payload }
-        : state;
+export function savedReducer(state: TicketData = defaultTicketData, action: ActionType): TicketData {
+    return action.type === SET_SAVED ? { ...state, saved: action.payload } : state;
 }
 
 export function setTicketFieldsReducer(
@@ -81,20 +76,10 @@ export function setTicketFieldsReducer(
     }
 }
 
-export function receivedReducer(
-    state: TicketsData = defaultTicketsData,
-    action: ActionType
-): TicketsData {
-    return action.type === SET_RECEIVED
-        ? { ...state, isReceived: action.payload }
-        : state;
+export function receivedReducer(state: TicketsData = defaultTicketsData, action: ActionType): TicketsData {
+    return action.type === SET_RECEIVED ? { ...state, isReceived: action.payload } : state;
 }
 
-export function getTicketsReducer(
-    state: TicketsData = defaultTicketsData,
-    action: ActionType
-): TicketsData {
-    return action.type === SET_GET_TICKETS
-        ? { ...state, tickets: action.payload.slice(0) }
-        : state;
+export function getTicketsReducer(state: TicketsData = defaultTicketsData, action: ActionType): TicketsData {
+    return action.type === SET_GET_TICKETS ? { ...state, tickets: action.payload.slice(0) } : state;
 }

@@ -1,19 +1,9 @@
 import React from "react";
 import "./TicketView.module.css";
 import { useDispatch } from "react-redux";
-import {
-    deleteTicketAction,
-    editTicketAction,
-} from "../../store/actions/tickets-actions";
+import { deleteTicketAction, editTicketAction } from "../../store/actions/tickets-actions";
 import { Ticket } from "../../models/Ticket";
-import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    Chip,
-    Typography,
-} from "@mui/material";
+import { Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import classes from "./TicketView.module.css";
@@ -35,20 +25,11 @@ const TicketView: React.FC<Props> = (props: Props) => {
                 <Typography gutterBottom variant="h6" component="h2">
                     Дата игры: {props.ticket.date}
                 </Typography>
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="div"
-                >
+                <Typography variant="body2" color="textSecondary" component="div">
                     {props.ticket.combination.sixNumbers
                         .sort((a, b) => a - b)
                         .map((n, i) => (
-                            <Chip
-                                style={{ margin: "2px" }}
-                                key={i}
-                                color="primary"
-                                label={n}
-                            />
+                            <Chip style={{ margin: "2px" }} key={i} color="primary" label={n} />
                         ))}
                     <Chip
                         style={{ margin: "2px" }}

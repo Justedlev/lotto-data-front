@@ -22,9 +22,7 @@ export default class LottoDataServiceRest implements ILottoData {
 
     async deteleTicket(numberOfTicket: number): Promise<Ticket> {
         const t: Ticket = await axios
-            .delete<Ticket>(
-                `${this.url}/delete/ticket?number=${numberOfTicket}`
-            )
+            .delete<Ticket>(`${this.url}/delete/ticket?number=${numberOfTicket}`)
             .then((response) => response.data);
         console.log(t);
         return t;
@@ -44,9 +42,7 @@ export default class LottoDataServiceRest implements ILottoData {
 
     async getTicketsOfRangeDate(from: Date, to: Date): Promise<Ticket[]> {
         const tickets: Ticket[] = await axios
-            .get<Ticket[]>(
-                `${this.url}/get/tickets?fromDate=${from}&toDate=${to}`
-            )
+            .get<Ticket[]>(`${this.url}/get/tickets?fromDate=${from}&toDate=${to}`)
             .then((response) => response.data);
         console.log(tickets);
         return tickets;

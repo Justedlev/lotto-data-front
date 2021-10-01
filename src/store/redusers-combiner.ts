@@ -6,10 +6,7 @@ import RepeatableInput from "../models/RepeatableInput";
 import { TicketData, TicketsData } from "../models/Ticket";
 import { getApplicationReducer } from "./reducers/app-reducer";
 import { setLoadingReducer } from "./reducers/loading-reducer";
-import {
-    getRepeatablesReducer,
-    setRepeatableFieldsReducer,
-} from "./reducers/repeatable-reducer";
+import { getRepeatablesReducer, setRepeatableFieldsReducer } from "./reducers/repeatable-reducer";
 import {
     getTicketsReducer,
     receivedReducer,

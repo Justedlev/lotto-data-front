@@ -10,33 +10,25 @@ export function setLoadingAction(isLoading: boolean): (dispatch: any) => void {
     };
 }
 
-export function setLoadingTicketsAction(
-    isLoading: boolean
-): (dispatch: any) => void {
+export function setLoadingTicketsAction(isLoading: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_LOADING_TICKETS, payload: isLoading });
     };
 }
 
-export function setLoadingAddTicketAction(
-    isLoading: boolean
-): (dispatch: any) => void {
+export function setLoadingAddTicketAction(isLoading: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_LOADING_ADD_TICKET, payload: isLoading });
     };
 }
 
-export function setLoadingDeleteTicketAction(
-    isLoading: boolean
-): (dispatch: any) => void {
+export function setLoadingDeleteTicketAction(isLoading: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_LOADING_DELETE_TICKET, payload: isLoading });
     };
 }
 
-export function setLoadingRepeatableAction(
-    isLoading: boolean
-): (dispatch: any) => void {
+export function setLoadingRepeatableAction(isLoading: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_LOADING_REPEATABLE, payload: isLoading });
     };

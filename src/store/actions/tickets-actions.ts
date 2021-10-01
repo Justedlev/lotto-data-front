@@ -13,25 +13,19 @@ export const SET_ID_TICKET = "set-id-ticket";
 export const SET_TICKET = "set-ticket";
 export const SET_EDIT_TICKET = "set-edit-ticket";
 export const SET_DATE_OF_TICKET = "set-date-of-ticket";
-export const SET_COMBINATION_SIX_NUMBERS_OF_TICKET =
-    "set-combination-six-numbers-of-ticket";
-export const SET_COMBINATION_STRONG_NUMBER_OF_TICKET =
-    "set-combination-strong-number-of-ticket";
+export const SET_COMBINATION_SIX_NUMBERS_OF_TICKET = "set-combination-six-numbers-of-ticket";
+export const SET_COMBINATION_STRONG_NUMBER_OF_TICKET = "set-combination-strong-number-of-ticket";
 export const SET_SAVED = "set-saved";
 export const SET_RECEIVED = "set-received";
 export const SET_DELETED = "set-deleted";
 
-export function setDeletedTicketAction(
-    isdeleted: boolean
-): (dispatch: any) => void {
+export function setDeletedTicketAction(isdeleted: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_DELETED, payload: isdeleted });
     };
 }
 
-export function setReceivedTicketsAction(
-    isReceived: boolean
-): (dispatch: any) => void {
+export function setReceivedTicketsAction(isReceived: boolean): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({ type: SET_RECEIVED, payload: isReceived });
     };
@@ -63,9 +57,7 @@ export function addDateOfTicketAction(date: Date): (dispatch: any) => void {
     };
 }
 
-export function addCombinationSixNumbersOfTicketAction(
-    sixNumbers: number[]
-): (dispatch: any) => void {
+export function addCombinationSixNumbersOfTicketAction(sixNumbers: number[]): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({
             type: SET_COMBINATION_SIX_NUMBERS_OF_TICKET,
@@ -75,9 +67,7 @@ export function addCombinationSixNumbersOfTicketAction(
     };
 }
 
-export function addCombinationStrongNumberOfTicketAction(
-    strong: number
-): (dispatch: any) => void {
+export function addCombinationStrongNumberOfTicketAction(strong: number): (dispatch: any) => void {
     return (dispatch) => {
         dispatch({
             type: SET_COMBINATION_STRONG_NUMBER_OF_TICKET,
@@ -117,13 +107,9 @@ export function saveTicketAction(ticket: Ticket): (dispatch: any) => void {
             dispatch(setLoadingAddTicketAction(false));
             dispatch(addIdTicketAction(NaN));
             dispatch(addDateOfTicketAction(new Date()));
-            dispatch(
-                addCombinationSixNumbersOfTicketAction(new Array(6).fill(NaN))
-            );
+            dispatch(addCombinationSixNumbersOfTicketAction(new Array(6).fill(NaN)));
             dispatch(addCombinationStrongNumberOfTicketAction(NaN));
-            dispatch(
-                setSavedTicketAction(t != null ? SUCCESSFUL : UNSUCCESSFUL)
-            );
+            dispatch(setSavedTicketAction(t != null ? SUCCESSFUL : UNSUCCESSFUL));
             dispatch(setReturnCodeAction(ReturnTypes.OK));
         } catch (e) {
             dispatch(setLoadingAddTicketAction(false));
@@ -133,9 +119,7 @@ export function saveTicketAction(ticket: Ticket): (dispatch: any) => void {
     };
 }
 
-export function deleteTicketAction(
-    numberOfTicket: number
-): (dispatch: any) => void {
+export function deleteTicketAction(numberOfTicket: number): (dispatch: any) => void {
     return async (dispatch) => {
         try {
             dispatch(setLoadingDeleteTicketAction(true));
