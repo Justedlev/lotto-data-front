@@ -4,8 +4,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 
-test('Лоттерейные билеты', () => {
+test('ЛоттоБилеты', () => {
   render(<Provider store={store}><App /></Provider>);
-  const linkElement = screen.getByText(/Лоттерейные билеты/i);
+  const linkElement = screen.getByText(/ЛоттоБилеты/i);
   expect(linkElement).toBeInTheDocument();
 });
