@@ -122,7 +122,7 @@ export default function RepeatableTableComponent(r: Rows) {
     const [orderBy, setOrderBy] = React.useState<keyof Data>('number');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
