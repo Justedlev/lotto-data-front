@@ -6,6 +6,6 @@ export const convertDateToString = (date: Date) => {
     return res;
 }
 
-const addFirstZero = (num: number) => {
+export const addFirstZero = (num: number) => {
     return num < 10 ? `0${num}` : `${num}`;
 }
