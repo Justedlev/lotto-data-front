@@ -16,7 +16,7 @@ const defaultLoading = {
     isLoadingRepeatable: false,
 };
 
-export function setLoadingReducer(state: Loading = defaultLoading, action: ActionType): Loading {
+export function loadingReducer(state: Loading = defaultLoading, action: ActionType): Loading {
     switch (action.type) {
         case SET_LOADING:
             return { ...state, isLoading: action.payload };

@@ -6,7 +6,7 @@ const defaultAppState = {
     isSidebar: false,
 };
 
-export function getApplicationReducer(state: Application = defaultAppState, action: ActionType): Application {
+export function applicationReducer(state: Application = defaultAppState, action: ActionType): Application {
     switch (action.type) {
         case SET_SIDEBAR:
             return { ...state, isSidebar: action.payload };

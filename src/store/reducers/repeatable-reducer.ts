@@ -5,6 +5,7 @@ import RepeatableInput from "../../models/RepeatableInput";
 import {
     SET_REPEATABLES,
     SET_REPEATABLES_DATA,
+    SET_REPEATABLES_MESSAGE,
     SET_REPEATABLES_RECEIVED,
     SET_REPEATABLE_ALLORSTRONG,
     SET_REPEATABLE_FROM_DATE,
@@ -17,7 +18,7 @@ const defaultRepatableInput = {
     toDate: new Date(),
 };
 
-export function setRepeatableFieldsReducer(
+export function repeatableFieldsReducer(
     state: RepeatableInput = defaultRepatableInput,
     action: ActionType
 ): RepeatableInput {
@@ -34,19 +35,22 @@ export function setRepeatableFieldsReducer(
 }
 
 const defaultRepeatableState = {
+    message: "",
     isReceived: false,
-    repeatables: [],
+    data: [],
 };
 
-export function getRepeatablesReducer(
+export function repeatablesReducer(
     state: RepeatableData = defaultRepeatableState,
     action: ActionType
 ): RepeatableData {
     switch (action.type) {
         case SET_REPEATABLES_DATA:
             return action.payload;
+        case SET_REPEATABLES_MESSAGE:
+            return { ...state, message: action.payload };
         case SET_REPEATABLES:
-            return { ...state, repeatables: action.payload.slice() };
+            return { ...state, data: action.payload.slice() };
         case SET_REPEATABLES_RECEIVED:
             return { ...state, isReceived: action.payload };
         default:
