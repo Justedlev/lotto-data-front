@@ -1,8 +1,8 @@
 import ActionType from "../../models/ActionType";
 import { AllOrStrong } from "../../models/AllOrStrong";
-import Repeatable from "../../models/Repeatable";
+import { RepeatableData } from "../../models/Repeatable";
 import RepeatableInput from "../../models/RepeatableInput";
-import { SET_REPEATABLES, SET_REPEATABLE_ALLORSTRONG, SET_REPEATABLE_FROM_DATE, SET_REPEATABLE_TO_DATE } from "../actions/repeatable-actions";
+import { SET_REPEATABLES, SET_REPEATABLES_DATA, SET_REPEATABLES_RECEIVED, SET_REPEATABLE_ALLORSTRONG, SET_REPEATABLE_FROM_DATE, SET_REPEATABLE_TO_DATE } from "../actions/repeatable-actions";
 
 const defaultRepatableInput = {
     allOrStrong: AllOrStrong.ALL,
@@ -23,10 +23,19 @@ export function setRepeatableFieldsReducer(state: RepeatableInput = defaultRepat
     }
 }
 
-export function getRepeatablesReducer(state: Repeatable[] = [], action: ActionType): Repeatable[] {
+const defaultRepeatableState = {
+    isReceived: false,
+    repeatables: []
+}
+
+export function getRepeatablesReducer(state: RepeatableData = defaultRepeatableState, action: ActionType): RepeatableData {
     switch (action.type) {
+        case SET_REPEATABLES_DATA:
+            return action.payload;
         case SET_REPEATABLES:
-            return action.payload.splice(0);
+            return { ...state, repeatables: action.payload.slice() };
+        case SET_REPEATABLES_RECEIVED:
+            return { ...state, isReceived: action.payload };
         default:
             return state;
     }

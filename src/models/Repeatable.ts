@@ -1,6 +1,9 @@
-type Repeatable = {
+export type Repeatable = {
     number: number,
     count: number
 }
 
-export default Repeatable;
+export type RepeatableData = {
+    isReceived: boolean,
+    repeatables: Repeatable[]
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AllOrStrong } from "../models/AllOrStrong";
-import Repeatable from "../models/Repeatable";
+import { Repeatable } from "../models/Repeatable";
 import { Ticket } from "../models/Ticket";
 import ILottoData from "./ILottoData";
 

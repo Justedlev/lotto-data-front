@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
-import Repeatable from '../../models/Repeatable';
+import { Repeatable } from '../../models/Repeatable';
 
 interface Data {
     number: number;

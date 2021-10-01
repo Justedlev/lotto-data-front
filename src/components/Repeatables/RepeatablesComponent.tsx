@@ -11,11 +11,11 @@ import { convertDateToString } from '../../utils/converter';
 
 const RepeatablesComponent: React.FC = () => {
     const dispatch = useDispatch();
-    const repeatables = useSelector(getRepeatables);
+    const repeatableData = useSelector(getRepeatables);
     const repeatableInput: RepeatableInput = useSelector(setRepeatableFields);
     const loadingRepeatable: boolean = useSelector(loading).isLoadingRepeatable;
 
-    console.log(repeatables, repeatableInput);
+    console.log(repeatableData, repeatableInput);
 
     return (
         <div className={classes.root}>
@@ -23,6 +23,7 @@ const RepeatablesComponent: React.FC = () => {
                 <FormLabel>
                     <Box sx={{ minWidth: 120 }}>
                         <TextField
+                            size="small"
                             style={{ margin: "10px", width: "165px" }}
                             id="from-date"
                             label="С даты игры"
@@ -36,6 +37,7 @@ const RepeatablesComponent: React.FC = () => {
                             }}
                         />
                         <TextField
+                            size="small"
                             style={{ margin: "10px", width: "165px" }}
                             id="to-date"
                             label="До даты игры"
@@ -51,6 +53,7 @@ const RepeatablesComponent: React.FC = () => {
                         <FormControl style={{ margin: "10px" }} sx={{ minWidth: 165 }}>
                             <InputLabel id="demo-simple-select-label">По каким числам</InputLabel>
                             <Select
+                                size="small"
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={repeatableInput.allOrStrong}
@@ -80,7 +83,7 @@ const RepeatablesComponent: React.FC = () => {
             {
                 loadingRepeatable ? <Box sx={{ width: '100%' }}>
                     <LinearProgress />
-                </Box> : repeatables.length === 0 ? <Alert severity="warning">Ничего не найдено</Alert> : <RepeatableTableComponent rows={repeatables} />
+                </Box> : repeatableData.repeatables.length === 0 ? <Alert severity="warning">Ничего не найдено</Alert> : <RepeatableTableComponent rows={repeatableData.repeatables} />
             }
         </div>
     );

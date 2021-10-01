@@ -26,8 +26,8 @@ const AddTicketComponent: React.FC = () => {
 
     console.log(ticket);
 
-    const handlePushToArray = (index: number, num: number) => {
-        const array = ticket.combination.sixNumbers;
+    const handleAddToArray = (index: number, num: number) => {
+        const array = ticket.combination.sixNumbers.slice();
         array.splice(index, 1, num);
         dispatch(addCombinationSixNumbersOfTicketAction(array));
     }
@@ -73,7 +73,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(0, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(0, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
@@ -86,7 +86,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(1, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(1, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
@@ -99,7 +99,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(2, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(2, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
@@ -112,7 +112,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(3, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(3, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
@@ -125,7 +125,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(4, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(4, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
@@ -138,7 +138,7 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={e => handlePushToArray(5, parseInt(e.target.value))}
+                    onChange={e => handleAddToArray(5, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"

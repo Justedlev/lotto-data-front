@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import Application from "../models/Application";
 import Loading from "../models/Loading";
-import Repeatable from "../models/Repeatable";
+import { RepeatableData } from "../models/Repeatable";
 import RepeatableInput from "../models/RepeatableInput";
 import { TicketData, TicketsData } from "../models/Ticket";
 import { getApplicationReducer } from "./reducers/app-reducer";
@@ -17,7 +17,7 @@ export type ReducersType = {
     isSaved: TicketData,
     setTicketFields: TicketData,
     setRepeatableFields: RepeatableInput,
-    getRepeatables: Repeatable[]
+    getRepeatables: RepeatableData
 }
 
 export const rootReducers = combineReducers<ReducersType>({
