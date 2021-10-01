@@ -1,3 +1,5 @@
+import { Data } from "./Data";
+
 export const SUCCESSFUL = "successful";
 export const UNSUCCESSFUL = "unsuccessful";
 export const DEFAULT = "no-action-taken";
@@ -7,18 +9,16 @@ export type Combination = {
     strong: number;
 };
 
-export type TicketData = {
-    saved: string;
-    ticket: Ticket;
-};
-
-export type TicketsData = {
-    isReceived: boolean;
-    tickets: Ticket[];
-};
-
 export type Ticket = {
     id: number;
     date: Date;
     combination: Combination;
 };
+
+export type TicketData = {
+    message: string;
+    saved: string;
+    ticket: Ticket;
+};
+
+export type TicketsData = Data<Ticket[]>;
