@@ -17,7 +17,7 @@ const TicketView: React.FC<Props> = (props: Props) => {
     const dispatch = useDispatch();
 
     return (
-        <Card className={classes.ticket} key={props.key}>
+        <Card className={classes.ticket}>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                     Билет №{props.ticket.id}

@@ -31,10 +31,7 @@ type Order = "asc" | "desc";
 function getComparator<Key extends keyof any>(
     order: Order,
     orderBy: Key
-): (
-    a: { [key in Key]: number | string },
-    b: { [key in Key]: number | string }
-) => number {
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
     return order === "desc"
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
@@ -42,10 +39,7 @@ function getComparator<Key extends keyof any>(
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
-function stableSort<T>(
-    array: readonly T[],
-    comparator: (a: T, b: T) => number
-) {
+function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
     const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -80,20 +74,16 @@ const headCells: readonly HeadCell[] = [
 ];
 
 interface EnhancedTableProps {
-    onRequestSort: (
-        event: React.MouseEvent<unknown>,
-        property: keyof Data
-    ) => void;
+    onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
     order: Order;
     orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
     const { order, orderBy, onRequestSort } = props;
-    const createSortHandler =
-        (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-            onRequestSort(event, property);
-        };
+    const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+        onRequestSort(event, property);
+    };
 
     return (
         <TableHead>
@@ -129,10 +119,7 @@ export default function RepeatableTableComponent(r: Rows) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleRequestSort = (
-        event: React.MouseEvent<unknown>,
-        property: keyof Data
-    ) => {
+    const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
         const isAsc = orderBy === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);
@@ -162,27 +149,20 @@ export default function RepeatableTableComponent(r: Rows) {
         setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
 
     const isSelected = (name: number) => selected.indexOf(name) !== -1;
 
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - r.rows.length) : 0;
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - r.rows.length) : 0;
 
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
                 <TableContainer>
-                    <Table
-                        sx={{ minWidth: 250 }}
-                        aria-labelledby="tableTitle"
-                        size={"medium"}
-                    >
+                    <Table sx={{ minWidth: 250 }} aria-labelledby="tableTitle" size={"medium"}>
                         <EnhancedTableHead
                             order={order}
                             orderBy={orderBy}
@@ -190,31 +170,20 @@ export default function RepeatableTableComponent(r: Rows) {
                         />
                         <TableBody>
                             {stableSort(r.rows, getComparator(order, orderBy))
-                                .slice(
-                                    page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
-                                )
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(
-                                        row.number
-                                    );
+                                    const isItemSelected = isSelected(row.number);
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) =>
-                                                handleClick(event, row.number)
-                                            }
+                                            onClick={(event) => handleClick(event, row.number)}
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
                                             key={row.number}
                                         >
-                                            <TableCell align="center">
-                                                {row.number}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {row.count}
-                                            </TableCell>
+                                            <TableCell align="center">{row.number}</TableCell>
+                                            <TableCell align="center">{row.count}</TableCell>
                                         </TableRow>
                                     );
                                 })}

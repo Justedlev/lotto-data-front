@@ -1,43 +1,34 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    SUCCESSFUL,
-    Ticket,
-    TicketData,
-    UNSUCCESSFUL,
-} from "../../models/Ticket";
-import {
-    addCombinationSixNumbersOfTicketAction,
-    addCombinationStrongNumberOfTicketAction,
-    addDateOfTicketAction,
-    addIdTicketAction,
-    saveTicketAction,
-} from "../../store/actions/tickets-actions";
+import { SUCCESSFUL, TicketData, UNSUCCESSFUL } from "../../models/Ticket";
+import {} from "../../store/actions/tickets-actions";
 import { ReducersType } from "../../store/redusers-combiner";
-import { isSaved, loading, setTicketFields } from "../../store/selectors";
+import { getLoading, getTicketFields } from "../../store/selectors";
 import Loading from "../../models/Loading";
 import { Alert, CardActions, TextField } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import classes from "./AddTicket.module.css";
 import { LoadingButton } from "@mui/lab";
 import { convertDateToString } from "../../utils/converter";
+import {
+    saveTicketAction,
+    setCombinationSixNumbersOfTicketAction,
+    setCombinationStrongNumberOfTicketAction,
+    setDateOfTicketAction,
+    setIdTicketAction,
+} from "../../store/actions/new-ticket-actions";
 
 const AddTicketComponent: React.FC = () => {
     const dispatch = useDispatch();
-    const ticket: Ticket = useSelector<ReducersType, TicketData>(
-        setTicketFields
-    ).ticket;
-    const saved: string = useSelector<ReducersType, TicketData>(isSaved).saved;
-    const loadingSaved: boolean = useSelector<ReducersType, Loading>(
-        loading
-    ).isLoadingAddTicket;
+    const ticketData: TicketData = useSelector<ReducersType, TicketData>(getTicketFields);
+    const loadingSaved: boolean = useSelector<ReducersType, Loading>(getLoading).isLoadingAddTicket;
 
-    console.log(ticket);
+    console.log(ticketData);
 
     const handleAddToArray = (index: number, num: number) => {
-        const array = ticket.combination.sixNumbers.slice();
+        const array = ticketData.ticket.combination.sixNumbers.slice();
         array.splice(index, 1, num);
-        dispatch(addCombinationSixNumbersOfTicketAction(array));
+        dispatch(setCombinationSixNumbersOfTicketAction(array));
     };
 
     return (
@@ -46,12 +37,12 @@ const AddTicketComponent: React.FC = () => {
                 <TextField
                     size="small"
                     style={{ width: "165px", margin: "15px" }}
-                    value={ticket.id}
+                    value={ticketData.ticket.id}
                     id="standard-basic"
                     label="Билет №"
                     type="number"
                     onChange={(e) => {
-                        dispatch(addIdTicketAction(parseInt(e.target.value)));
+                        dispatch(setIdTicketAction(parseInt(e.target.value)));
                     }}
                 />
                 <TextField
@@ -63,11 +54,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={convertDateToString(ticket.date)}
+                    value={convertDateToString(ticketData.ticket.date)}
                     onChange={(e) => {
-                        dispatch(
-                            addDateOfTicketAction(new Date(e.target.value))
-                        );
+                        dispatch(setDateOfTicketAction(new Date(e.target.value)));
                     }}
                 />
             </div>
@@ -76,97 +65,85 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[0]}
+                    value={ticketData.ticket.combination.sixNumbers[0]}
                     id="first"
                     label="Первое"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(0, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(0, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[1]}
+                    value={ticketData.ticket.combination.sixNumbers[1]}
                     id="second"
                     label="Второе"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(1, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(1, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[2]}
+                    value={ticketData.ticket.combination.sixNumbers[2]}
                     id="third"
                     label="Третье"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(2, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(2, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[3]}
+                    value={ticketData.ticket.combination.sixNumbers[3]}
                     id="fourth"
                     label="Четвертое"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(3, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(3, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[4]}
+                    value={ticketData.ticket.combination.sixNumbers[4]}
                     id="fifth"
                     label="Пятое"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(4, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(4, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticket.combination.sixNumbers[5]}
+                    value={ticketData.ticket.combination.sixNumbers[5]}
                     id="sixth"
                     label="Шестое"
                     type="number"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) =>
-                        handleAddToArray(5, parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleAddToArray(5, parseInt(e.target.value))}
                 />
                 <TextField
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px", textAlign: "center" }}
-                    value={ticket.combination.strong}
+                    value={ticketData.ticket.combination.strong}
                     id="strong"
                     label="Усилиное"
                     type="number"
@@ -174,11 +151,7 @@ const AddTicketComponent: React.FC = () => {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        dispatch(
-                            addCombinationStrongNumberOfTicketAction(
-                                parseInt(e.target.value)
-                            )
-                        );
+                        dispatch(setCombinationStrongNumberOfTicketAction(parseInt(e.target.value)));
                     }}
                 />
             </div>
@@ -191,16 +164,16 @@ const AddTicketComponent: React.FC = () => {
                     size="large"
                     startIcon={<SaveIcon />}
                     onClick={() => {
-                        dispatch(saveTicketAction(ticket));
+                        dispatch(saveTicketAction(ticketData.ticket));
                     }}
                 >
                     Добавить
                 </LoadingButton>
             </CardActions>
-            {saved === SUCCESSFUL ? (
-                <Alert severity="success">Успешно добавлен</Alert>
-            ) : saved === UNSUCCESSFUL ? (
-                <Alert severity="error">Не удалось добавить</Alert>
+            {ticketData.saved === SUCCESSFUL ? (
+                <Alert severity="success">{ticketData.message}</Alert>
+            ) : ticketData.saved === UNSUCCESSFUL ? (
+                <Alert severity="error">{ticketData.message}</Alert>
             ) : null}
         </div>
     );
