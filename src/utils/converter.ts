@@ -1,4 +1,4 @@
-export const convertDateToString = (date: Date) => {
+export const convertDateToString = (date: Date) => {    
     const year: number = date.getFullYear();
     const month: number = date.getMonth() + 1;
     const day: number = date.getDate();

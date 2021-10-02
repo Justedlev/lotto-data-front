@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SUCCESSFUL, TicketData, UNSUCCESSFUL } from "../../models/Ticket";
-import {} from "../../store/actions/tickets-actions";
+import { DEFAULT, ERROR, SUCCESSFUL, Ticket, TicketData, UNSUCCESSFUL } from "../../models/Ticket";
 import { ReducersType } from "../../store/redusers-combiner";
 import { getLoading, getTicketFields } from "../../store/selectors";
 import Loading from "../../models/Loading";
@@ -9,26 +8,31 @@ import { Alert, CardActions, TextField } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import classes from "./AddTicket.module.css";
 import { LoadingButton } from "@mui/lab";
-import { convertDateToString } from "../../utils/converter";
-import {
-    saveTicketAction,
-    setCombinationSixNumbersOfTicketAction,
-    setCombinationStrongNumberOfTicketAction,
-    setDateOfTicketAction,
-    setIdTicketAction,
-} from "../../store/actions/new-ticket-actions";
+import { saveTicketAction, setTicketSavedAction } from "../../store/actions/new-ticket-actions";
 
 const AddTicketComponent: React.FC = () => {
     const dispatch = useDispatch();
     const ticketData: TicketData = useSelector<ReducersType, TicketData>(getTicketFields);
     const loadingSaved: boolean = useSelector<ReducersType, Loading>(getLoading).isLoadingAddTicket;
+    const [ticketFields, setTicketFields] = useState<Ticket>({
+        id: NaN,
+        date: new Date(),
+        combination: {
+            sixNumbers: new Array(6).fill(NaN),
+            strong: NaN,
+        },
+    });
 
-    console.log(ticketData);
+    console.log(ticketData, ticketFields);
+
+    useEffect(() => {
+        dispatch(setTicketSavedAction(DEFAULT));
+    }, [dispatch, ticketFields]);
 
     const handleAddToArray = (index: number, num: number) => {
-        const array = ticketData.ticket.combination.sixNumbers.slice();
+        const array = ticketFields.combination.sixNumbers.slice();
         array.splice(index, 1, num);
-        dispatch(setCombinationSixNumbersOfTicketAction(array));
+        setTicketFields({ ...ticketFields, combination: { ...ticketFields.combination, sixNumbers: array } });
     };
 
     return (
@@ -37,12 +41,12 @@ const AddTicketComponent: React.FC = () => {
                 <TextField
                     size="small"
                     style={{ width: "165px", margin: "15px" }}
-                    value={ticketData.ticket.id}
+                    value={ticketFields.id}
                     id="standard-basic"
                     label="Билет №"
                     type="number"
                     onChange={(e) => {
-                        dispatch(setIdTicketAction(parseInt(e.target.value)));
+                        setTicketFields({ ...ticketFields, id: parseInt(e.target.value) });
                     }}
                 />
                 <TextField
@@ -54,9 +58,9 @@ const AddTicketComponent: React.FC = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={convertDateToString(ticketData.ticket.date)}
+                    // value={convertDateToString(ticketData.ticket.date)}
                     onChange={(e) => {
-                        dispatch(setDateOfTicketAction(new Date(e.target.value)));
+                        setTicketFields({ ...ticketFields, date: new Date(e.target.value) });
                     }}
                 />
             </div>
@@ -65,7 +69,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[0]}
+                    value={ticketFields.combination.sixNumbers[0]}
                     id="first"
                     label="Первое"
                     type="number"
@@ -78,7 +82,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[1]}
+                    value={ticketFields.combination.sixNumbers[1]}
                     id="second"
                     label="Второе"
                     type="number"
@@ -91,7 +95,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[2]}
+                    value={ticketFields.combination.sixNumbers[2]}
                     id="third"
                     label="Третье"
                     type="number"
@@ -104,7 +108,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[3]}
+                    value={ticketFields.combination.sixNumbers[3]}
                     id="fourth"
                     label="Четвертое"
                     type="number"
@@ -117,7 +121,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[4]}
+                    value={ticketFields.combination.sixNumbers[4]}
                     id="fifth"
                     label="Пятое"
                     type="number"
@@ -130,7 +134,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px" }}
-                    value={ticketData.ticket.combination.sixNumbers[5]}
+                    value={ticketFields.combination.sixNumbers[5]}
                     id="sixth"
                     label="Шестое"
                     type="number"
@@ -143,7 +147,7 @@ const AddTicketComponent: React.FC = () => {
                     size="small"
                     className={classes.number_input}
                     style={{ margin: "15px", textAlign: "center" }}
-                    value={ticketData.ticket.combination.strong}
+                    value={ticketFields.combination.strong}
                     id="strong"
                     label="Усилиное"
                     type="number"
@@ -151,7 +155,10 @@ const AddTicketComponent: React.FC = () => {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        dispatch(setCombinationStrongNumberOfTicketAction(parseInt(e.target.value)));
+                        setTicketFields({
+                            ...ticketFields,
+                            combination: { ...ticketFields.combination, strong: parseInt(e.target.value) },
+                        });
                     }}
                 />
             </div>
@@ -164,7 +171,7 @@ const AddTicketComponent: React.FC = () => {
                     size="large"
                     startIcon={<SaveIcon />}
                     onClick={() => {
-                        dispatch(saveTicketAction(ticketData.ticket));
+                        dispatch(saveTicketAction(ticketFields));
                     }}
                 >
                     Добавить
@@ -172,8 +179,10 @@ const AddTicketComponent: React.FC = () => {
             </CardActions>
             {ticketData.saved === SUCCESSFUL ? (
                 <Alert severity="success">{ticketData.message}</Alert>
-            ) : ticketData.saved === UNSUCCESSFUL ? (
+            ) : ticketData.saved === ERROR ? (
                 <Alert severity="error">{ticketData.message}</Alert>
+            ) : ticketData.saved === UNSUCCESSFUL ? (
+                <Alert severity="info">{ticketData.message}</Alert>
             ) : null}
         </div>
     );
